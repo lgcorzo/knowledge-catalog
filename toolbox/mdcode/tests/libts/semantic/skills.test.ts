@@ -615,6 +615,15 @@ describe('text that would otherwise break the output', () => {
         .toBe(header.split('|').length);
   });
 
+  test('a backslash and a pipe in a cell are both escaped', () => {
+    const awkward = withAction(model, {
+      ...RUNNABLE,
+      description: 'path\\to|file',
+    });
+    const skill = generate(rt(awkward)).files['SKILL.md'];
+    expect(skill).toContain('path\\\\to\\|file');
+  });
+
   test('a pipe in an action name does not split a table row', () => {
     // `action.name` is `z.string()`, and a pipe in one splits the row even
     // inside backticks -- in the router table an agent reads to pick a page.

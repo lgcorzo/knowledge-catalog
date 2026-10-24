@@ -775,7 +775,7 @@ function collapse(text: string): string {
 
 /** Markdown reads a newline inside a table cell as the end of the row. */
 function cell(text: string): string {
-  return collapse(text).replace(/\|/g, '\\|');
+  return collapse(text).replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
 }
 
 /** Keeps the author's paragraphs and drops their line wrapping. */

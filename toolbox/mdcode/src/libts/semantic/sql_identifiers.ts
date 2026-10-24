@@ -141,9 +141,9 @@ export function isReservedKeyword(name: string): boolean {
   return RESERVED_KEYWORDS.has(name.toUpperCase());
 }
 
-// Backticks `name`, escaping any embedded backtick.
+// Backticks `name`, escaping any embedded backslash and backtick.
 function backtick(name: string): string {
-  return `\`${name.replace(/`/g, '\\`')}\``;
+  return `\`${name.replace(/\\/g, '\\\\').replace(/`/g, '\\`')}\``;
 }
 
 // Quotes a name that would otherwise be MISREAD as a bare identifier: a simple
